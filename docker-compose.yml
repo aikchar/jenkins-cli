@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+    cli:
+        image: azul/zulu-openjdk-alpine
+        environment:
+            JENKINS_LEADER_ADMIN_USER: "${JENKINS_LEADER_ADMIN_USER}"
+            JENKINS_LEADER_ADMIN_PASSWORD: "${JENKINS_LEADER_ADMIN_PASSWORD}"
+            JENKINS_URL: "${JENKINS_URL}"
+        tty: true
+        volumes:
+            - ${PWD}/jenkins-cli.jar:/root/jenkins-cli.jar:ro
+        working_dir: /root
+    cli-alt:
+        build:
+            context: .
+            args:
+                JENKINS_IP: "${JENKINS_IP}"
+                JENKINS_HOST: "${JENKINS_HOST}"
+                JENKINS_PORT: "${JENKINS_PORT}"
+                JENKINS_URL: "${JENKINS_URL}"
+                KEYSTOREFILE: "${KEYSTOREFILE}"
+                KEYSTOREPASS: "${KEYSTOREPASS}"
+        image: localhost/jenkins-cli
+        environment:
+            JENKINS_LEADER_ADMIN_USER: "${JENKINS_LEADER_ADMIN_USER}"
+            JENKINS_LEADER_ADMIN_PASSWORD: "${JENKINS_LEADER_ADMIN_PASSWORD}"
+            JENKINS_URL: "${JENKINS_URL}"
+            JAVA_TOOL_OPTIONS: "-Djavax.net.ssl.trustStore=${KEYSTOREFILE} -Djavax.net.ssl.trustStorePassword=${KEYSTOREPASS}"
+        tty: true
+        volumes:
+            - ${PWD}/jenkins-cli.jar:/root/jenkins-cli.jar:ro
+        working_dir: /root
