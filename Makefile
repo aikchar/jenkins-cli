@@ -40,7 +40,7 @@ cli-exec: cli-up
 	pipenv run docker-compose exec cli sh
 
 .PHONY: cli-up
-cli-up: cli/jenkins-cli.jar
+cli-up:
 	pipenv run docker-compose up -d cli
 
 .PHONY: cli-stop
@@ -60,7 +60,7 @@ cli-alt-exec: cli-alt-up
 	pipenv run docker-compose exec cli-alt sh
 
 .PHONY: cli-alt-up
-cli-alt-up: cli/jenkins-cli.jar
+cli-alt-up:
 	pipenv run docker-compose up -d cli-alt
 
 .PHONY: cli-alt-stop
