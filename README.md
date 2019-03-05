@@ -76,6 +76,10 @@ they are not set by you.
 
     $ make init
 
+Downloads Jenkins CLI from the server. If the server is using self-signed
+certificate the connection will fail. You can edit _Makefile_ to allow
+download.
+
 You should examine and modify _docker-compose.yml_ as required.
 
 ## cli
@@ -84,6 +88,10 @@ You should examine and modify _docker-compose.yml_ as required.
 
 Run a [Bourne Shell](https://en.wikipedia.org/wiki/Bourne_shell) session in the
 container.
+
+The CLI jar is in _/root/_ in the container. Run it like so,
+
+    $ java -jar /root/jenkins-cli.jar
 
 ## cli-alt
 
@@ -99,6 +107,10 @@ certificate used by the Jenkins server.
 
 Run a [Bourne Shell](https://en.wikipedia.org/wiki/Bourne_shell) session in the
 container.
+
+The CLI jar is in _/root/_ in the container. Run it like so,
+
+    $ java -jar /root/jenkins-cli.jar
 
 More information,
 
